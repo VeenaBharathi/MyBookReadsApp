@@ -12,6 +12,14 @@ class SearchBooks extends React.Component {
     query: ''
   }
 
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({
+        books: books
+      })
+    })
+  }
+
   updateQueryAndSearch = (query) => {
     this.setState(
       {query: query},
