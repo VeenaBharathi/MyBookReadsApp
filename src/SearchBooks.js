@@ -8,8 +8,8 @@ class SearchBooks extends React.Component {
 
   state = {
     books: [],
-      results: [],
-      query: ''
+    results: [],
+    query: ''
   }
 
   updateQueryAndSearch = (query) => {
