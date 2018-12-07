@@ -1,6 +1,7 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import {Route} from 'react-router-dom'
+import SearchBooks from './SearchBooks'
 import ListOfBooksComponent from './ListOfBooksComponent'
 import './App.css'
 
@@ -13,6 +14,20 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     books:[]
+  }
+
+  updateShelf = (currbook, shelf) => {
+    BooksAPI.update(currbook, shelf)
+            .then((response) => {
+                          currbook.shelf = shelf;
+                          this.setState((state) => ({
+                            books: state.books
+                                  .filter((allbooks) => { 
+                                        return (allbooks.id !== currbook.id) 
+                                       })
+                                  .concat([currbook])
+                          }))
+            })
   }
 
  componentDidMount() {
@@ -28,10 +43,19 @@ class BooksApp extends React.Component {
 
        <div className="MyReadsApp">
           <Route exact path="/" render={() => (
-                  <ListOfBooksComponent 
+              <ListOfBooksComponent 
                   books={this.state.books} 
+                  updateShelf={this.updateShelf}
                   />
               )}
+          />
+
+          <Route path="/search" render={() => (
+            <SearchBooks
+              books={this.state.books}
+              updateShelf={this.updateShelf}
+            />
+            )}
           />
         </div>     
   

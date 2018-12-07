@@ -1,5 +1,4 @@
 import React from 'react'
-import * as BooksAPI from './BooksAPI'
 import {Link} from 'react-router-dom'
 import ShelfComponent from './ShelfComponent'
 import './App.css'
@@ -9,9 +8,9 @@ class ListOfBooksComponent extends React.Component {
 render (){
 
 const books = this.props.books;
-const shelfNames = ['Currently Reading', 'Want To Read', 'Read'];	
-const shelves = ['currentlyReading','wantToRead','read'];
+const updateShelf = this.props.updateShelf;
 
+const shelfNames = ['Currently Reading', 'Want To Read', 'Read'];	
 	return (
 		<div className="list-books">
             <div className="list-books-title">
@@ -48,6 +47,7 @@ const shelves = ['currentlyReading','wantToRead','read'];
                           books={filteredBooks}
                           shelfName={shelfName}
                           key={shelfName}
+                          updateShelf={updateShelf}
                      />
                      )
                  
@@ -58,7 +58,7 @@ const shelves = ['currentlyReading','wantToRead','read'];
             </div>
 
             <div className="open-search">
-              <Link to ="/"><button/></Link>
+              <Link to ="/search"><button/></Link>
             </div>
 
         </div>      	

@@ -1,5 +1,4 @@
 import React from 'react'
-import * as BooksAPI from './BooksAPI'
 import './App.css'
 
 class SingleBookItemComponent extends React.Component {
@@ -7,6 +6,7 @@ class SingleBookItemComponent extends React.Component {
   
     render(){
       let book = this.props.book;
+      const updateShelf = this.props.updateShelf;
       return (
        <li>
             <div className="book">
@@ -14,7 +14,9 @@ class SingleBookItemComponent extends React.Component {
                             <div className="book-cover" style={{ width: 128, height: 174, 
                               backgroundImage: `url("${(book.imageLinks && book.imageLinks.thumbnail) || ''}")` }}></div>
                             <div className="book-shelf-changer">
-                              <select>
+                              <select value={book.shelf || 'none'} onChange={(e) => {
+                     updateShelf(book, e.target.value);
+                                }}>
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>

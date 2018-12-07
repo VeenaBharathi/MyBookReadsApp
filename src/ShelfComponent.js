@@ -1,5 +1,4 @@
 import React from 'react'
-import * as BooksAPI from './BooksAPI'
 import SingleBookItemComponent from './SingleBookItemComponent'
 import './App.css'
 
@@ -8,7 +7,8 @@ class ShelfComponent extends React.Component {
     render(){
     	 let getBooks = this.props.books;
          let shelfName = this.props.shelfName;
-    		
+    	 const updateShelf = this.props.updateShelf;
+
     	 return( 
     	 	<div className="bookshelf">
                   <h2 className="bookshelf-title">{shelfName}</h2>
@@ -21,6 +21,7 @@ class ShelfComponent extends React.Component {
 										<SingleBookItemComponent
 											book={b}
 											key={b.id}
+											updateShelf={updateShelf}
 										/>
 									)
 								})
