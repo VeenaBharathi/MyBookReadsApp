@@ -4,6 +4,38 @@ This is the starter template for the final assessment project for Udacity's Reac
 
 Of course, you are free to start this project from scratch if you wish! Just be sure to use [Create React App](https://github.com/facebookincubator/create-react-app) to bootstrap the project.
 
+## Instructions
+
+Project Title
+* This is a project to maintain books that you are currently reading, want to read, already read. You can search and pick a new book from the availbale books and add it to one of the three shelves. You can also move the books among the shelves or move it to 'none' so that the book disappears from  the 'my reads' stack page.
+
+Getting Started
+* The code can be downloaded from following git hub location-
+https://github.com/VeenaBharathi/MyBookReadsApp.git
+
+Prerequisites
+* Git Bash
+* Browser
+* Sublime Test2
+
+Install steps
+* git clone <above repository> into any local folder.
+* Run npm install, npm install react-router-dom, npm install react-route and the application is ready to use.
+* Right click on index.html and open with chrome and you can view jasmine test results!
+
+Instructions
+
+1. The main page has 3 stacks or shelves - 'Currently Reading, 'Want to Read','Read' along with a add button
+
+2. The user can move the books between the shelves or c hosose to add a new book by clicking on add icon, which takes user to search page, search book by name and move the boook to appropriate shelf.
+
+3.The search page has a back button which will take the user back to main page.
+  
+4.The result books in the search page must show the appropriate shelf name selected.
+
+Built With
+* Sublime Text Editor
+
 ## TL;DR
 
 To get started developing right away:
