@@ -8,17 +8,17 @@ class SingleBookItemComponent extends React.Component {
     render(){
 
       const currBook = this.props.book;
-      const updateShelf = this.props.updateShelf;
+      const shelfUpdate = this.props.shelfUpdate;
       
       return (
        <li>
             <div className="book">
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 174, 
-                              backgroundImage: `url("${(currBook.imageLinks && currBook.imageLinks.thumbnail) || ''}")` }}></div>
+                              backgroundImage: `url("${currBook.imageLinks.thumbnail} || ''}")` }}></div>
                             <div className="book-shelf-changer">
-                              <select value={currBook.shelf } onChange={(e) => {
-                     updateShelf(currBook, e.target.value);
+                              <select value={currBook.shelf } onChange={(event) => {
+                     shelfUpdate(currBook, event.target.value);
                                 }}>
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
@@ -30,7 +30,7 @@ class SingleBookItemComponent extends React.Component {
                           </div>
                           <div className="book-title">{currBook.title}</div>
                           <div className="book-authors">
-                              {(currBook.authors && currBook.authors[0]) || 'No author listed for the book'}
+                              {currBook.authors || 'No author listed for the book'}
                           </div>
                         </div>
       </li>

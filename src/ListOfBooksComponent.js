@@ -8,7 +8,7 @@ class ListOfBooksComponent extends React.Component {
 render (){
 
 const books = this.props.books;
-const updateShelf = this.props.updateShelf;
+const shelfUpdate = this.props.shelfUpdate;
 
 const shelfNames = ['Currently Reading', 'Want To Read', 'Read'];	
 	return (
@@ -47,7 +47,7 @@ const shelfNames = ['Currently Reading', 'Want To Read', 'Read'];
                           books={filteredBooks}
                           shelfName={shelfName}
                           key={shelfName}
-                          updateShelf={updateShelf}
+                          shelfUpdate={shelfUpdate}
                      />
                      )
                  

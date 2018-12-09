@@ -7,7 +7,7 @@ class ShelfComponent extends React.Component {
     render(){
     	 let getBooks = this.props.books;
          let shelfName = this.props.shelfName;
-    	 const updateShelf = this.props.updateShelf;
+    	 const shelfUpdate = this.props.shelfUpdate;
 
     	 return( 
     	 	<div className="bookshelf">
@@ -21,7 +21,7 @@ class ShelfComponent extends React.Component {
 										<SingleBookItemComponent
 											book={b}
 											key={b.id}
-											updateShelf={updateShelf}
+											shelfUpdate={shelfUpdate}
 										/>
 									)
 								})

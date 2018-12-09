@@ -16,6 +16,7 @@ class BooksApp extends React.Component {
     books:[]
   }
 
+// Fetch all books and set state at load 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
         this.setState({
@@ -24,27 +25,29 @@ class BooksApp extends React.Component {
     })
   }
 
-  updateShelf = (book, newShelf) => {
+//sehlf update function ehich updates the selectced book with new shelf value
+  shelfUpdate = (currbook, newShelf) => {
     const availableBooks = this.state.books;
-    BooksAPI.update(book, newShelf)
+    BooksAPI.update(currbook, newShelf)
           .then((response) => {               
               let otherBooks = availableBooks.filter(allbooks => 
-                       {return allbooks.shelf !== newShelf && allbooks.id !== book.id});
-              book.shelf = newShelf;
+                       {return allbooks.shelf !== newShelf && allbooks.id !== currbook.id});
+              currbook.shelf = newShelf;
               let filteredBooks = availableBooks.filter(allbooks => 
-                        {return allbooks.shelf === book.shelf && allbooks.id !== book.id}).concat([book]);
+                        {return allbooks.shelf === currbook.shelf && allbooks.id !== currbook.id}).concat([currbook]);
               let newBookSet = filteredBooks.concat(otherBooks)
               this.setState({books:newBookSet});
       })
 }
 
+// defining routes '/' to main page and '/search' to search page
   render() {
     return  (
        <div className="MyReadsApp">
           <Route exact path="/" render={() => (
               <ListOfBooksComponent 
                   books={this.state.books} 
-                  updateShelf={this.updateShelf}
+                  shelfUpdate={this.shelfUpdate}
                   />
               )}
           />
@@ -52,7 +55,7 @@ class BooksApp extends React.Component {
           <Route path="/search" render={() => (
             <SearchBooks
               books={this.state.books}
-              updateShelf={this.updateShelf}
+              shelfUpdate={this.shelfUpdate}
             />
             )}
           />
