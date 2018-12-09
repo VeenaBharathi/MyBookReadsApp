@@ -16,21 +16,7 @@ class BooksApp extends React.Component {
     books:[]
   }
 
-  updateShelf = (currbook, shelf) => {
-    BooksAPI.update(currbook, shelf)
-            .then((response) => {
-                          currbook.shelf = shelf;
-                          this.setState((state) => ({
-                            books: state.books
-                                  .filter((allbooks) => { 
-                                        return (allbooks.id !== currbook.id) 
-                                       })
-                                  .concat([currbook])
-                          }))
-            })
-  }
-
- componentDidMount() {
+  componentDidMount() {
     BooksAPI.getAll().then((books) => {
         this.setState({
           books: books
@@ -38,9 +24,22 @@ class BooksApp extends React.Component {
     })
   }
 
+  updateShelf = (book, newShelf) => {
+    const availableBooks = this.state.books;
+    BooksAPI.update(book, newShelf)
+          .then((response) => {               
+              let otherBooks = availableBooks.filter(allbooks => 
+                       {return allbooks.shelf !== newShelf && allbooks.id !== book.id});
+              book.shelf = newShelf;
+              let filteredBooks = availableBooks.filter(allbooks => 
+                        {return allbooks.shelf === book.shelf && allbooks.id !== book.id}).concat([book]);
+              let newBookSet = filteredBooks.concat(otherBooks)
+              this.setState({books:newBookSet});
+      })
+}
+
   render() {
     return  (
-
        <div className="MyReadsApp">
           <Route exact path="/" render={() => (
               <ListOfBooksComponent 
@@ -57,8 +56,7 @@ class BooksApp extends React.Component {
             />
             )}
           />
-        </div>     
-  
+        </div>    
     )
   }
 }
